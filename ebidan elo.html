@@ -116,7 +116,7 @@ function renderBattle(){
   document.getElementById('imgA').src=currentA.img;document.getElementById('nameA').textContent=currentA.name;document.getElementById('groupA').textContent=currentA.group;document.getElementById('eloA').textContent='ELO '+elo[currentA.id];
   document.getElementById('imgB').src=currentB.img;document.getElementById('nameB').textContent=currentB.name;document.getElementById('groupB').textContent=currentB.group;document.getElementById('eloB').textContent='ELO '+elo[currentB.id];
   document.getElementById('btnLeft').textContent=t('battleLeft');document.getElementById('btnRight').textContent=t('battleRight');
-  document.getElementById('btnBoth').textContent=t('bothBtn');document.getElementById('btnSkip').textContent=t('skipBtn');document.getElementById('btnBack').textContent=t('backBtn');
+  document.getElementById('btnBoth').innerHTML=t('bothBtn');document.getElementById('btnSkip').textContent=t('skipBtn');document.getElementById('btnBack').textContent=t('backBtn');
   var cA=document.getElementById('cardA'),cB=document.getElementById('cardB');
   cA.style.borderColor=GC[currentA.group]||'#444';cB.style.borderColor=GC[currentB.group]||'#444';
   cA.classList.toggle('border-zone',phase===2&&isBorderZone(currentA.id));cB.classList.toggle('border-zone',phase===2&&isBorderZone(currentB.id));
