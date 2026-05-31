@@ -84,7 +84,7 @@ function vote(side,type){
   if(currentA&&currentB){voteHistory.push({elo:JSON.parse(JSON.stringify(elo)),pairIdx:pairIdx,currentA:currentA,currentB:currentB});if(voteHistory.length>10)voteHistory.shift();}
   if(type==='love'){var w=side==='A'?currentA:currentB,l=side==='A'?currentB:currentA;updateElo(w.id,l.id,K*2);}
   else if(type==='both'){var maxElo=Math.max(elo[currentA.id],elo[currentB.id]);elo[currentA.id]=maxElo;elo[currentB.id]=maxElo;}
-  else{var minElo=Math.min(elo[currentA.id],elo[currentB.id]);elo[currentA.id]=minElo;elo[currentB.id]=minElo;}
+  else{var minElo=Math.min(elo[currentA.id],elo[currentB.id]);var pen=(elo[currentA.id]===DEFAULT_ELO&&elo[currentB.id]===DEFAULT_ELO)?-8:0;elo[currentA.id]=minElo+pen;elo[currentB.id]=minElo+pen;}
   pairIdx++;if(pairIdx>=maxMatches){showResult();return;}renderBattle();
 }
 function undoVote(){if(voteHistory.length===0)return;var prev=voteHistory.pop();elo=prev.elo;pairIdx=prev.pairIdx;currentA=prev.currentA;currentB=prev.currentB;document.getElementById('imgA').src=currentA.img;document.getElementById('nameA').textContent=currentA.name;document.getElementById('groupA').textContent=currentA.group;document.getElementById('eloA').textContent='ELO '+elo[currentA.id];document.getElementById('imgB').src=currentB.img;document.getElementById('nameB').textContent=currentB.name;document.getElementById('groupB').textContent=currentB.group;document.getElementById('eloB').textContent='ELO '+elo[currentB.id];document.getElementById('progFill').style.width=Math.round((pairIdx/maxMatches)*100)+'%';document.getElementById('progText').textContent=pairIdx+' / '+maxMatches+' '+t('battleCount');}
